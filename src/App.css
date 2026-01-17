@@ -1,0 +1,244 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color: #0f0f0f;
+  background-color: #f6f6f6;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 主容器样式 */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 标题样式 */
+.app-title {
+  text-align: center;
+  color: #1890ff;
+  margin-bottom: 30px;
+}
+
+/* 头部样式 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* 卡片样式 */
+.config-card,
+.matrix-card,
+.batch-card,
+.naming-card {
+  margin-bottom: 20px;
+}
+
+/* 矩阵映射卡片样式 */
+.matrix-card {
+  --ant-card-body-padding: 10px !important;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+/* 矩阵表格样式 */
+.matrix-card .ant-table {
+  margin-bottom: 0;
+}
+
+/* 减少表格单元格内边距 */
+.matrix-card .ant-table-cell {
+  padding: 8px 16px !important;
+}
+
+/* 旧样式兼容 */
+.container {
+  margin: 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: 0.75s;
+}
+
+.logo.vite:hover {
+  filter: drop-shadow(0 0 2em #747bff);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafb);
+}
+
+.logo.tauri:hover {
+  filter: drop-shadow(0 0 2em #24c8db);
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+input,
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: #0f0f0f;
+  background-color: #ffffff;
+  transition: border-color 0.25s;
+  box-shadow: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: #396cd8;
+}
+
+button:active {
+  border-color: #396cd8;
+  background-color: #e8e8e8;
+}
+
+#greet-input {
+  margin-right: 5px;
+}
+
+/* 深色主题支持 */
+.dark {
+  --text-color: #f6f6f6;
+  --background-color: #242535;
+  --link-hover-color: #f8fbfb;
+  --input-background: #3a3b4d;
+  --input-text: #ffffff;
+  --button-background: #3a3b4d;
+  --button-text: #ffffff;
+  --button-active-background: #4a4b60;
+  
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+/* 深色模式下的主容器背景 */
+.dark .app-container {
+  background-color: var(--background-color);
+}
+
+.dark a:hover {
+  color: var(--link-hover-color);
+}
+
+.dark input,
+.dark button {
+  color: var(--input-text);
+  background-color: var(--button-background);
+}
+
+.dark button:active {
+  background-color: var(--button-active-background);
+}
+
+/* 深色模式下的卡片样式 */
+.dark .ant-card {
+  background-color: #3a3b4d;
+  color: var(--text-color);
+}
+
+/* 深色模式下的卡片标题样式 */
+.dark .ant-card-head-title {
+  color: white;
+}
+
+/* 深色模式下的标签页样式 */
+.dark .ant-tabs-nav {
+  background-color: var(--background-color);
+}
+
+.dark .ant-tabs-tab {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.dark .ant-tabs-tab:hover {
+  color: var(--link-hover-color);
+}
+
+.dark .ant-tabs-tab.ant-tabs-tab-active {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+/* 深色模式下的选择器样式 */
+.dark .ant-select-selector {
+  background-color: var(--input-background) !important;
+  color: var(--input-text) !important;
+  border-color: #5a5b6e !important;
+}
+
+.dark .ant-select-dropdown {
+  background-color: var(--input-background);
+  color: var(--input-text);
+  border-color: #5a5b6e;
+}
+
+.dark .ant-select-item-option:hover {
+  background-color: #4a4b60;
+}
+
+/* 胶囊标签页样式 */
+.ant-tabs-capsule > .ant-tabs-nav .ant-tabs-tab {
+  padding: 8px 24px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* 胶囊标签页活动状态样式 */
+.ant-tabs-capsule > .ant-tabs-nav .ant-tabs-tab.ant-tabs-tab-active {
+  background-color: #1890ff;
+  color: white;
+}
+
+/* 深色模式下的胶囊标签页活动状态样式 */
+.dark .ant-tabs-capsule > .ant-tabs-nav .ant-tabs-tab.ant-tabs-tab-active {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* 胶囊标签页悬停样式 */
+.ant-tabs-capsule > .ant-tabs-nav .ant-tabs-tab:hover {
+  color: #1890ff;
+}

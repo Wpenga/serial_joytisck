@@ -3,15 +3,15 @@ use crate::config::MatrixConfig;
 use tokio::sync::Mutex;
 use std::sync::Arc;
 
-// è§£æåçš„æ•°æ®ç»“æ„
+// ½âÎöºóµÄÊı¾İ½á¹¹
 #[derive(Clone, serde::Serialize)]
 pub struct ParsedData {
-    pub index: u8,  // ç´¢å¼•å·
-    pub keys: [bool; 24],  // 24ä¸ªæŒ‰é”®çŠ¶æ€
-    pub adc: [u8; 14],  // 14è·¯ADCæ•°æ®
-    pub leds: [bool; 20],  // 20ä¸ªLEDçŠ¶æ€
-    pub raw_data: Vec<u8>,  // åŸå§‹æ•°æ®
-    pub valid: bool,  // æ•°æ®æ˜¯å¦æœ‰æ•ˆ
+    pub index: u8,  // Ë÷ÒıºÅ
+    pub keys: [bool; 24],  // 24¸ö°´¼ü×´Ì¬
+    pub adc: [u8; 14],  // 14Â·ADCÊı¾İ
+    pub leds: [bool; 20],  // 20¸öLED×´Ì¬
+    pub raw_data: Vec<u8>,  // Ô­Ê¼Êı¾İ
+    pub valid: bool,  // Êı¾İÊÇ·ñÓĞĞ§
 }
 
 impl Default for ParsedData {
@@ -29,8 +29,8 @@ impl Default for ParsedData {
 
 pub struct DataParser {
     serial: Arc<Mutex<Option<SerialManager>>>,
-    parsed_data: Arc<Mutex<ParsedData>>,  // è§£æåçš„æ•°æ®
-    config: Arc<Mutex<MatrixConfig>>,  // é…ç½®ä¿¡æ¯
+    parsed_data: Arc<Mutex<ParsedData>>,  // ½âÎöºóµÄÊı¾İ
+    config: Arc<Mutex<MatrixConfig>>,  // ÅäÖÃĞÅÏ¢
 }
 
 impl DataParser {
@@ -42,13 +42,13 @@ impl DataParser {
         }
     }
     
-    // è¿æ¥ä¸²å£
+    // Á¬½Ó´®¿Ú
     pub async fn connect(&mut self, serial: SerialManager) {
         let mut guard = self.serial.lock().await;
         *guard = Some(serial);
     }
     
-    // æ–­å¼€è¿æ¥
+    // ¶Ï¿ªÁ¬½Ó
     pub async fn disconnect(&mut self) {
         let mut guard = self.serial.lock().await;
         if let Some(serial) = guard.as_mut() {
@@ -57,20 +57,20 @@ impl DataParser {
         *guard = None;
     }
     
-    // è¯»å–å¹¶è§£ææ•°æ®
+    // ¶ÁÈ¡²¢½âÎöÊı¾İ
     pub async fn read_and_parse(&mut self) -> Result<(), String> {
         let mut buffer = [0u8; 128];
         let mut combined_data = Vec::new();
         
-        // è¯»å–ä¸²å£æ•°æ®ï¼Œå°è¯•è¯»å–å¤šæ¬¡ä»¥è·å–æ›´å¤šæ•°æ®
+        // ¶ÁÈ¡´®¿ÚÊı¾İ£¬³¢ÊÔ¶ÁÈ¡¶à´ÎÒÔ»ñÈ¡¸ü¶àÊı¾İ
         let mut total_read = 0;
-        for _ in 0..3 { // æœ€å¤šå°è¯•3æ¬¡ï¼Œé¿å…é˜»å¡å¤ªä¹…
+        for _ in 0..3 { // ×î¶à³¢ÊÔ3´Î£¬±ÜÃâ×èÈûÌ«¾Ã
             let read_len = {
                 let mut guard = self.serial.lock().await;
                 if let Some(serial) = guard.as_mut() {
                     serial.read(&mut buffer).await?
                 } else {
-                    return Err("ä¸²å£æœªè¿æ¥".to_string());
+                    return Err("´®¿ÚÎ´Á¬½Ó".to_string());
                 }
             };
             
@@ -78,46 +78,46 @@ impl DataParser {
                 combined_data.extend_from_slice(&buffer[0..read_len]);
                 total_read += read_len;
             } else {
-                break; // æ²¡æœ‰æ›´å¤šæ•°æ®å¯è¯»ï¼Œé€€å‡ºå¾ªç¯
+                break; // Ã»ÓĞ¸ü¶àÊı¾İ¿É¶Á£¬ÍË³öÑ­»·
             }
         }
         
-        // è§£ææ•°æ®
+        // ½âÎöÊı¾İ
         let new_parsed_data = if total_read > 0 {
             self.parse_data(&combined_data)
         } else {
-            // å¦‚æœæ²¡æœ‰è¯»å–åˆ°æ•°æ®ï¼Œè¿”å›é»˜è®¤æ•°æ®
+            // Èç¹ûÃ»ÓĞ¶ÁÈ¡µ½Êı¾İ£¬·µ»ØÄ¬ÈÏÊı¾İ
             ParsedData::default()
         };
         
-        // æ€»æ˜¯æ›´æ–°æ•°æ®ï¼Œå³ä½¿æ²¡æœ‰å®Œæ•´å¸§ï¼Œè¿™æ ·ç”¨æˆ·å¯ä»¥çœ‹åˆ°åŸå§‹æ•°æ®å˜åŒ–
+        // ×ÜÊÇ¸üĞÂÊı¾İ£¬¼´Ê¹Ã»ÓĞÍêÕûÖ¡£¬ÕâÑùÓÃ»§¿ÉÒÔ¿´µ½Ô­Ê¼Êı¾İ±ä»¯
         let mut data_guard = self.parsed_data.lock().await;
         *data_guard = new_parsed_data;
         
         Ok(())
     }
     
-    // è§£ææ•°æ®
+    // ½âÎöÊı¾İ
     fn parse_data(&self, data: &[u8]) -> ParsedData {
         let mut parsed = ParsedData::default();
         parsed.raw_data = data.to_vec();
         
-        // å¯»æ‰¾æ‰€æœ‰å¯èƒ½çš„å®Œæ•´å¸§
+        // Ñ°ÕÒËùÓĞ¿ÉÄÜµÄÍêÕûÖ¡
         let mut valid_frames = Vec::new();
         let mut all_frames = Vec::new();
         
-        // éå†æ‰€æœ‰å¯èƒ½çš„å¸§å¤´ä½ç½®
+        // ±éÀúËùÓĞ¿ÉÄÜµÄÖ¡Í·Î»ÖÃ
         for i in 0..data.len() - 23 {
             if data[i] == 0xAA {
                 let end = i + 23;
                 if end < data.len() && data[end] == 0xBF {
                     let frame = &data[i..=end];
                     
-                    // æ£€æŸ¥å¸§é•¿åº¦
+                    // ¼ì²éÖ¡³¤¶È
                     if frame.len() == 24 {
                         all_frames.push(frame);
                         
-                        // è®¡ç®—å¼‚æˆ–æ ¡éªŒå€¼ï¼ˆåŒ…æ‹¬å¸§å¤´ï¼‰
+                        // ¼ÆËãÒì»òĞ£ÑéÖµ£¨°üÀ¨Ö¡Í·£¬²»°üÀ¨Ğ£ÑéÎ»ºÍ½áÊø·û£©
                         let checksum = frame[22];
                         let mut calculated_checksum = 0u8;
                         for j in 0..22 {
@@ -132,87 +132,87 @@ impl DataParser {
             }
         }
         
-        // ä¼˜å…ˆä½¿ç”¨æœ‰æ•ˆå¸§
+        // ÓÅÏÈÊ¹ÓÃÓĞĞ§Ö¡
         let target_frame = if let Some(frame) = valid_frames.last() {
             frame
         } else if let Some(frame) = all_frames.last() {
-            // å¦‚æœæ²¡æœ‰æœ‰æ•ˆå¸§ï¼Œä½¿ç”¨æœ€åä¸€ä¸ªå®Œæ•´å¸§ï¼Œå³ä½¿æ ¡éªŒå’Œä¸åŒ¹é…
+            // Èç¹ûÃ»ÓĞÓĞĞ§Ö¡£¬Ê¹ÓÃ×îºóÒ»¸öÍêÕûÖ¡£¬¼´Ê¹Ğ£ÑéºÍ²»Æ¥Åä
             frame
         } else {
             return parsed;
         };
         
-        // è§£æç´¢å¼•å·
+        // ½âÎöË÷ÒıºÅ
         parsed.index = target_frame[1];
         
-        // è§£ææŒ‰é”®çŠ¶æ€ï¼ˆ3å­—èŠ‚ï¼Œ24ä¸ªæŒ‰é”®ï¼‰
+        // ½âÎö°´¼ü×´Ì¬£¨3×Ö½Ú£¬24¸ö°´¼ü£©
         for i in 0..24 {
             let byte_idx = 2 + i / 8;
             let bit_idx = i % 8;
             parsed.keys[i] = (target_frame[byte_idx] & (1 << bit_idx)) != 0;
         }
         
-        // è§£æADCæ•°æ®ï¼ˆ14å­—èŠ‚ï¼‰
+        // ½âÎöADCÊı¾İ£¨14×Ö½Ú£©
         for i in 0..14 {
             parsed.adc[i] = target_frame[5 + i];
         }
         
-        // è§£æLEDçŠ¶æ€ï¼ˆ3å­—èŠ‚ï¼Œ20ä¸ªLEDï¼‰
+        // ½âÎöLED×´Ì¬£¨3×Ö½Ú£¬20¸öLED£©
         for i in 0..20 {
             let byte_idx = 19 + i / 8;
             let bit_idx = i % 8;
             parsed.leds[i] = (target_frame[byte_idx] & (1 << bit_idx)) != 0;
         }
         
-        // æ ‡è®°æ•°æ®æ˜¯å¦æœ‰æ•ˆ - æ€»æ˜¯æ ‡è®°ä¸ºæœ‰æ•ˆï¼Œå› ä¸ºç”¨æˆ·ç¡®è®¤æ•°æ®æ˜¯æœ‰æ•ˆçš„
+        // ±ê¼ÇÊı¾İÊÇ·ñÓĞĞ§ - ×ÜÊÇ±ê¼ÇÎªÓĞĞ§£¬ÒòÎªÓÃ»§È·ÈÏÊı¾İÊÇÓĞĞ§µÄ
         parsed.valid = true;
         
         parsed
     }
     
-    // è·å–è§£æåçš„æ•°æ®
+    // »ñÈ¡½âÎöºóµÄÊı¾İ
     pub async fn get_parsed_data(&self) -> ParsedData {
         let guard = self.parsed_data.lock().await;
         guard.clone()
     }
     
-    // è·å–åŸå§‹æ•°æ®
+    // »ñÈ¡Ô­Ê¼Êı¾İ
     pub async fn get_raw_data(&self) -> Vec<u8> {
         let guard = self.parsed_data.lock().await;
         guard.raw_data.clone()
     }
     
-    // è·å–æŒ‰é”®çŠ¶æ€
+    // »ñÈ¡°´¼ü×´Ì¬
     pub async fn get_keys(&self) -> [bool; 24] {
         let guard = self.parsed_data.lock().await;
         guard.keys
     }
     
-    // è·å–ADCæ•°æ®
+    // »ñÈ¡ADCÊı¾İ
     pub async fn get_adc(&self) -> [u8; 14] {
         let guard = self.parsed_data.lock().await;
         guard.adc
     }
     
-    // è·å–LEDçŠ¶æ€
+    // »ñÈ¡LED×´Ì¬
     pub async fn get_leds(&self) -> [bool; 20] {
         let guard = self.parsed_data.lock().await;
         guard.leds
     }
     
-    // æ£€æŸ¥æ•°æ®æ˜¯å¦æœ‰æ•ˆ
+    // ¼ì²éÊı¾İÊÇ·ñÓĞĞ§
     pub async fn is_data_valid(&self) -> bool {
         let guard = self.parsed_data.lock().await;
         guard.valid
     }
     
-    // å‘é€å‘½ä»¤
+    // ·¢ËÍÃüÁî
     pub async fn send_command(&self, command: &[u8]) -> Result<usize, String> {
         let mut serial_guard = self.serial.lock().await;
         if let Some(serial) = serial_guard.as_mut() {
             serial.send(command).await
         } else {
-            Err("ä¸²å£æœªè¿æ¥".to_string())
+            Err("´®¿ÚÎ´Á¬½Ó".to_string())
         }
     }
 }

@@ -14,7 +14,7 @@ impl SerialManager {
             .data_bits(serialport::DataBits::Eight)
             .stop_bits(serialport::StopBits::One)
             .parity(serialport::Parity::None)
-            .timeout(std::time::Duration::from_millis(500))
+            .timeout(std::time::Duration::from_millis(10))
             .open()
             .map_err(|e| e.to_string())?;
         
@@ -28,24 +28,21 @@ impl SerialManager {
         if let Some(port) = port.as_mut() {
             port.write(data).map_err(|e| e.to_string())
         } else {
-            Err("串口未连接".to_string())
+            Err("Serial port not connected".to_string())
         }
     }
     
-    // 数据读取函数，只负责读取原始数据，不进行解析
     pub async fn read(&self, buffer: &mut [u8]) -> Result<usize, String> {
         let mut port = self.port.lock().await;
         
         if let Some(port) = port.as_mut() {
-            // 直接读取原始数据，不进行任何解析
             let read_bytes = port.read(buffer).map_err(|e| e.to_string())?;
             return Ok(read_bytes);
         } else {
-            Err("串口未连接".to_string())
+            Err("Serial port not connected".to_string())
         }
     }
     
-    // 列出可用串口
     pub fn list_ports() -> Vec<String> {
         serialport::available_ports()
             .unwrap_or_default()

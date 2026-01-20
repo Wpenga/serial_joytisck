@@ -50,7 +50,7 @@ function App() {
     valid: false
   });
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [refreshInterval, setRefreshInterval] = useState(1000); // 刷新间隔，毫秒
+  const [refreshInterval, setRefreshInterval] = useState(100); // 刷新间隔，毫秒
   
   // 语言切换
   const toggleLanguage = () => {
@@ -633,15 +633,19 @@ function App() {
   const renderRawData = () => {
     // 将原始数据按24字节分组，每组之间换行
     const bytes = parsedData.raw_data.map(byte => byte.toString(16).padStart(2, '0').toUpperCase());
-    const groups = [];
+    let allGroups = [];
     
-    // 每24字节为一组
-    for (let i = 0; i < bytes.length; i += 24) {
-      const group = bytes.slice(i, i + 24).join(' ');
-      groups.push(group);
+    // 每24字节为一组，只保留AA开头的有效帧
+    for (let i = 0; i < bytes.length - 23; i += 24) {
+      if (bytes[i] === 'AA') {
+        const group = bytes.slice(i, i + 24).join(' ');
+        allGroups.push(group);
+      }
     }
     
-    const rawHex = groups.join('\n');
+    // 只显示最新的3行
+    const recentGroups = allGroups.slice(-3);
+    const rawHex = recentGroups.join('\n');
     
     return (
       <Card title={t('data.rawDataTitle')}>
@@ -651,9 +655,10 @@ function App() {
           borderRadius: '8px',
           fontFamily: 'monospace',
           fontSize: '14px',
-          lineHeight: '1.6',
+          lineHeight: '1.8',
           whiteSpace: 'pre-wrap',
-          overflowX: 'auto'
+          overflowX: 'auto',
+          border: '1px solid #e8e8e8'
         }}>
           {rawHex || t('data.noData')}
         </div>
@@ -667,6 +672,10 @@ function App() {
               title={t('data.dataValid')} 
               value={parsedData.valid ? t('data.valid') : t('data.invalid')} 
               valueStyle={{ color: parsedData.valid ? '#52c41a' : '#ff4d4f' }}
+            />
+            <Statistic 
+              title={t('data.totalFrames')} 
+              value={allGroups.length} 
             />
           </Space>
         </div>

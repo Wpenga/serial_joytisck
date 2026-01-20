@@ -54,6 +54,7 @@
     "off": "Off",
     "frameIndex": "Frame Index",
     "dataValid": "Data Valid",
+    "totalFrames": "Total Frames",
     "valid": "Valid",
     "invalid": "Invalid",
     "noData": "No Data"

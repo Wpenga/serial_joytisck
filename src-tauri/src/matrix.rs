@@ -30,6 +30,7 @@ pub struct DataParser {
     serial: Arc<Mutex<Option<SerialManager>>>,
     parsed_data: Arc<Mutex<ParsedData>>,
     config: Arc<Mutex<MatrixConfig>>,
+    error_count: Arc<Mutex<u8>>, // 错误计数，最多返回5次错误
 }
 
 impl DataParser {
@@ -38,12 +39,16 @@ impl DataParser {
             serial: Arc::new(Mutex::new(None)),
             parsed_data: Arc::new(Mutex::new(ParsedData::default())),
             config: Arc::new(Mutex::new(config)),
+            error_count: Arc::new(Mutex::new(0)),
         }
     }
     
     pub async fn connect(&mut self, serial: SerialManager) {
         let mut guard = self.serial.lock().await;
         *guard = Some(serial);
+        // 连接时重置错误计数
+        let mut error_guard = self.error_count.lock().await;
+        *error_guard = 0;
     }
     
     pub async fn disconnect(&mut self) {
@@ -52,18 +57,42 @@ impl DataParser {
             serial.close().await;
         }
         *guard = None;
+        // 断开连接时重置错误计数
+        let mut error_guard = self.error_count.lock().await;
+        *error_guard = 0;
     }
     
     pub async fn read_and_parse(&mut self) -> Result<(), String> {
         let mut buffer = [0u8; 128];
         
         // 读取一次数据，获取最新的串口数据
-        let read_len = {
+        let read_result = {
             let mut guard = self.serial.lock().await;
             if let Some(serial) = guard.as_mut() {
-                serial.read(&mut buffer).await?
+                serial.read(&mut buffer).await
             } else {
                 return Err("Serial port not connected".to_string());
+            }
+        };
+        
+        let read_len = match read_result {
+            Ok(len) => {
+                // 成功读取数据，重置错误计数
+                let mut error_guard = self.error_count.lock().await;
+                *error_guard = 0;
+                len
+            },
+            Err(e) => {
+                // 读取失败，检查错误计数
+                let mut error_guard = self.error_count.lock().await;
+                if *error_guard < 5 {
+                    // 错误计数小于5，返回错误并增加计数
+                    *error_guard += 1;
+                    return Err(e);
+                } else {
+                    // 错误计数大于等于5，不返回错误，返回0字节读取
+                    0
+                }
             }
         };
         

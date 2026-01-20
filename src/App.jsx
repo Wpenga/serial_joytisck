@@ -51,6 +51,7 @@ function App() {
   });
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [refreshInterval, setRefreshInterval] = useState(100); // 刷新间隔，毫秒
+  const [refreshErrorCount, setRefreshErrorCount] = useState(0); // 刷新数据失败计数
   
   // 语言切换
   const toggleLanguage = () => {
@@ -500,8 +501,15 @@ function App() {
     try {
       const data = await invoke('read_and_parse_data');
       setParsedData(data);
+      // 成功读取数据，重置错误计数
+      setRefreshErrorCount(0);
     } catch (err) {
-      message.error(t('data.refreshError', { error: err }));
+      // 只在错误计数小于5时显示错误提示，最多显示5次
+      if (refreshErrorCount < 5) {
+        message.error(t('data.refreshError', { error: err }));
+      }
+      // 增加错误计数
+      setRefreshErrorCount(prevCount => prevCount + 1);
     } finally {
       setIsRefreshing(false);
     }
@@ -511,6 +519,9 @@ function App() {
   useEffect(() => {
     refreshPorts();
     loadConfig();
+    
+    // 连接状态变化时重置错误计数
+    setRefreshErrorCount(0);
     
     // 定时刷新数据
     let interval;

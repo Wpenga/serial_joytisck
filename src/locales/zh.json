@@ -18,6 +18,7 @@
     "dataParsing": "数据解析",
     "ledTest": "LED灯测试",
     "calibration": "设备校准",
+    "firmwareUpgrade": "固件升级",
     "naming": "自定义命名"
   },
   "serial": {
@@ -154,5 +155,34 @@
     "instructions": "操作说明",
     "instruction1": "1. 点击圆形LED指示灯可以切换灯的开关状态",
     "instruction2": "2. 每次点击会发送相应的开关指令到设备"
+  },
+  "firmwareUpgrade": {
+    "title": "固件升级",
+    "instructions": "操作步骤",
+    "step1": "发送特定串口码，使设备进入升级模式",
+    "step2": "上传要升级的固件文件",
+    "step3": "点击升级按钮开始升级",
+    "step1Title": "步骤1：发送升级命令",
+    "step2Title": "步骤2：上传固件",
+    "step3Title": "步骤3：开始升级",
+    "sendCommand": "发送升级命令",
+    "sendCommandSuccess": "升级命令发送成功",
+    "sendCommandError": "升级命令发送失败: {{error}}",
+    "uploadButton": "上传固件",
+    "fileSelected": "已选择固件文件：{{fileName}}",
+    "noFileSelected": "请先选择固件文件",
+    "upgradeButton": "升级",
+    "starting": "开始升级...",
+    "sendingFirmware": "正在发送固件数据...",
+    "sendingCRC": "正在发送CRC值...",
+    "sendingEndFlag": "正在发送结束标志...",
+    "upgradeSuccess": "固件升级成功",
+    "upgradeError": "固件升级失败: {{error}}",
+    "status": "升级状态",
+    "statusIdle": "等待升级",
+    "statusSending": "发送升级命令成功",
+    "statusUpgrading": "升级中",
+    "statusCompleted": "升级完成",
+    "statusError": "升级失败"
   }
 }

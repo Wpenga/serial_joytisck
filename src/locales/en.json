@@ -18,6 +18,7 @@
     "dataParsing": "Data Parsing",
     "ledTest": "LED Light Test",
     "calibration": "Device Calibration",
+    "firmwareUpgrade": "Firmware Upgrade",
     "naming": "Custom Naming"
   },
   "serial": {
@@ -155,5 +156,34 @@
     "instruction2": "2. Place the joystick device at rest in the center position until you hear a long beep from the buzzer, indicating center calibration is complete, approximately 8 seconds;",
     "instruction3": "3. After hearing the buzzer in step 2, start swinging the joystick or potentiometer to reach the maximum and minimum ranges, then stop when you hear a long beep, approximately 8 seconds;",
     "instruction4": "4. Manual calibration is complete. The calibrated parameters are automatically saved and will be used for calculations when powered on next time."
+  },
+  "firmwareUpgrade": {
+    "title": "Firmware Upgrade",
+    "instructions": "Operation Steps",
+    "step1": "Send specific serial code to put device into upgrade mode",
+    "step2": "Upload the firmware file to upgrade",
+    "step3": "Click upgrade button to start upgrade",
+    "step1Title": "Step 1: Send Upgrade Command",
+    "step2Title": "Step 2: Upload Firmware",
+    "step3Title": "Step 3: Start Upgrade",
+    "sendCommand": "Send Upgrade Command",
+    "sendCommandSuccess": "Upgrade command sent successfully",
+    "sendCommandError": "Failed to send upgrade command: {{error}}",
+    "uploadButton": "Upload Firmware",
+    "fileSelected": "Firmware file selected: {{fileName}}",
+    "noFileSelected": "Please select a firmware file first",
+    "upgradeButton": "Upgrade",
+    "starting": "Starting upgrade...",
+    "sendingFirmware": "Sending firmware data...",
+    "sendingCRC": "Sending CRC value...",
+    "sendingEndFlag": "Sending end flag...",
+    "upgradeSuccess": "Firmware upgrade successful",
+    "upgradeError": "Firmware upgrade failed: {{error}}",
+    "status": "Upgrade Status",
+    "statusIdle": "Waiting for upgrade",
+    "statusSending": "Upgrade command sent successfully",
+    "statusUpgrading": "Upgrading...",
+    "statusCompleted": "Upgrade completed",
+    "statusError": "Upgrade failed"
   }
 }

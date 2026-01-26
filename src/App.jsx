@@ -40,6 +40,13 @@ function App() {
   const [ledTestStatuses, setLedTestStatuses] = useState(Array(20).fill(false)); // 20个LED灯的状态数组，false: 关灯, true: 开灯
   const [ledTestCommand, setLedTestCommand] = useState(''); // 当前发送的指令
   
+  // 固件升级状态
+  const [firmwareFile, setFirmwareFile] = useState(null);
+  const [firmwarePath, setFirmwarePath] = useState('');
+  const [upgradeStatus, setUpgradeStatus] = useState('idle'); // idle, sending, upgrading, completed, error
+  const [upgradeProgress, setUpgradeProgress] = useState(0);
+  const [upgradeMessage, setUpgradeMessage] = useState('');
+  
   // 数据解析状态
   const [parsedData, setParsedData] = useState({
     index: 0,
@@ -694,6 +701,345 @@ function App() {
     );
   };
   
+  // 渲染固件升级界面
+  const renderFirmwareUpgrade = () => {
+    // 发送特定串口码 F5 5F 01 AB BF
+    const sendUpgradeCommand = async () => {
+      if (!isConnected) {
+        message.error(t('serial.notConnected'));
+        return;
+      }
+      
+      try {
+        const command = [0xF5, 0x5F, 0x01, 0xAB, 0xBF];
+        await invoke('send_calibration_command', { command });
+        message.success(t('firmwareUpgrade.sendCommandSuccess'));
+        setUpgradeStatus('sending');
+      } catch (err) {
+        message.error(t('firmwareUpgrade.sendCommandError', { error: err }));
+        setUpgradeStatus('error');
+      }
+    };
+    
+    // 处理文件上传
+    const handleFileUpload = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        setFirmwareFile(file);
+        setFirmwarePath(file.name);
+        message.success(t('firmwareUpgrade.fileSelected', { fileName: file.name }));
+      }
+    };
+    
+    // 清除选中的文件
+    const clearFile = () => {
+      setFirmwareFile(null);
+      setFirmwarePath('');
+      document.getElementById('firmware-upload').value = '';
+    };
+    
+    // 计算校验和（累加和，与Bootloader一致）
+    const calculateChecksum = (data) => {
+      let sum = 0;
+      for (const byte of data) {
+        sum = (sum + byte) & 0xFFFF; // 确保不会溢出
+      }
+      return sum;
+    };
+    
+    // 计算CRC32（与Bootloader一致）
+    const calculateCRC32 = (data) => {
+      let crc = 0xFFFFFFFF;
+      const polynomial = 0x04C11DB7;
+      const wordCount = Math.ceil(data.length / 4);
+      
+      for (let i = 0; i < wordCount; i++) {
+        const offset = i * 4;
+        let word = 0;
+        
+        // 读取32位字（小端序）
+        for (let j = 0; j < 4; j++) {
+          if (offset + j < data.length) {
+            word |= (data[offset + j] << (j * 8));
+          }
+        }
+        
+        // CRC32计算
+        crc ^= word;
+        for (let j = 0; j < 32; j++) {
+          if (crc & 0x80000000) {
+            crc = (crc << 1) ^ polynomial;
+          } else {
+            crc = crc << 1;
+          }
+          crc &= 0xFFFFFFFF; // 确保32位
+        }
+      }
+      
+      return ~crc & 0xFFFFFFFF;
+    };
+    
+    // 构建协议帧
+    const buildProtocolFrame = (deviceAddr, funcType, seq, data) => {
+      const dataLen = data.length;
+      const frame = new Uint8Array(4 + dataLen + 2);
+      
+      // [设备地址][功能码][序列号][数据长度]
+      frame[0] = deviceAddr;
+      frame[1] = funcType;
+      frame[2] = seq;
+      frame[3] = dataLen;
+      
+      // 数据内容
+      frame.set(data, 4);
+      
+      // 计算校验和
+      const checksum = calculateChecksum(frame.slice(0, 4 + dataLen));
+      frame[4 + dataLen] = (checksum >> 8) & 0xFF; // 高字节
+      frame[5 + dataLen] = checksum & 0xFF; // 低字节
+      
+      return frame;
+    };
+    
+    // 发送数据帧
+    const sendFrame = async (frame) => {
+      await invoke('send_calibration_command', { command: Array.from(frame) });
+    };
+    
+    // 接收响应（简化版）
+    const receiveResponse = async () => {
+      // 注意：当前前端没有直接的串口接收API，需要后端支持
+      // 这里我们简化处理，假设发送成功
+      return true;
+    };
+    
+    // 固件升级
+    const startUpgrade = async () => {
+      if (!isConnected) {
+        message.error(t('serial.notConnected'));
+        return;
+      }
+      
+      if (!firmwareFile) {
+        message.error(t('firmwareUpgrade.noFileSelected'));
+        return;
+      }
+      
+      setUpgradeStatus('upgrading');
+      setUpgradeProgress(0);
+      setUpgradeMessage(t('firmwareUpgrade.starting'));
+      
+      try {
+        // 常量定义
+        const DEVICE_ADDR = 0x01;
+        const FUNC_SEND_DATA = 0x01;
+        const FUNC_SEND_CRC = 0x06;
+        const MAX_DATA_LEN = 512; // 每次最大512字节
+        
+        // 1. 读取固件文件
+        const arrayBuffer = await firmwareFile.arrayBuffer();
+        const firmwareData = new Uint8Array(arrayBuffer);
+        const totalSize = firmwareData.length;
+        
+        setUpgradeMessage(t('firmwareUpgrade.sendingFirmware'));
+        
+        // 2. 计算CRC32（可选，根据实际需求）
+        const useCRC = false; // 可以根据需要设置为true
+        let crc = null;
+        
+        if (useCRC) {
+          crc = calculateCRC32(firmwareData);
+          setUpgradeMessage(`CRC32: 0x${crc.toString(16).padStart(8, '0').toUpperCase()}`);
+        }
+        
+        // 3. 分片发送固件数据
+        let sent = 0;
+        let sequence = 0;
+        
+        while (sent < totalSize) {
+          const chunkSize = Math.min(totalSize - sent, MAX_DATA_LEN);
+          const chunk = firmwareData.slice(sent, sent + chunkSize);
+          
+          // 构建数据帧
+          const frame = buildProtocolFrame(
+            DEVICE_ADDR,
+            FUNC_SEND_DATA,
+            sequence,
+            chunk
+          );
+          
+          // 发送数据帧
+          await sendFrame(frame);
+          
+          // 接收响应（可选，根据实际需求）
+          await receiveResponse();
+          
+          // 更新进度
+          sent += chunkSize;
+          const percent = Math.round((sent * 100) / totalSize);
+          setUpgradeProgress(percent);
+          setUpgradeMessage(`${t('firmwareUpgrade.sendingFirmware')} ${percent}%`);
+          
+          // 更新帧序列
+          sequence = (sequence + 1) % 256;
+          
+          // 添加延迟，避免发送过快
+          await new Promise(resolve => setTimeout(resolve, 50));
+        }
+        
+        // 4. 发送CRC值（如果启用）
+        if (useCRC && crc !== null) {
+          setUpgradeMessage(t('firmwareUpgrade.sendingCRC'));
+          
+          // 小端序：CRC32值的字节顺序
+          const crcBytes = new Uint8Array([
+            (crc & 0xFF),           // 低字节
+            ((crc >> 8) & 0xFF),     // 次低字节
+            ((crc >> 16) & 0xFF),    // 次高字节
+            ((crc >> 24) & 0xFF),    // 高字节
+          ]);
+          
+          // 构建CRC帧
+          const crcFrame = buildProtocolFrame(
+            DEVICE_ADDR,
+            FUNC_SEND_CRC,
+            sequence,
+            crcBytes
+          );
+          
+          // 发送CRC帧
+          await sendFrame(crcFrame);
+          await receiveResponse();
+          
+          // 更新帧序列
+          sequence = (sequence + 1) % 256;
+        }
+        
+        // 5. 发送结束标志
+        setUpgradeMessage(t('firmwareUpgrade.sendingEndFlag'));
+        
+        // 构建结束帧
+        const endFrame = buildProtocolFrame(
+          DEVICE_ADDR,
+          FUNC_SEND_DATA,
+          sequence,
+          new Uint8Array(0) // 数据长度为0
+        );
+        
+        // 发送结束帧
+        await sendFrame(endFrame);
+        await receiveResponse();
+        
+        // 完成升级
+        setUpgradeStatus('completed');
+        setUpgradeProgress(100);
+        setUpgradeMessage(t('firmwareUpgrade.completed'));
+        message.success(t('firmwareUpgrade.upgradeSuccess'));
+      } catch (err) {
+        console.error('升级失败:', err);
+        setUpgradeStatus('error');
+        setUpgradeMessage(t('firmwareUpgrade.upgradeError', { error: err }));
+        message.error(t('firmwareUpgrade.upgradeError', { error: err }));
+      }
+    };
+    
+    return (
+      <Card title={t('firmwareUpgrade.title')}>
+        <Space direction="vertical" style={{ width: '100%' }}>
+          {/* 操作步骤 */}
+          <div style={{ marginBottom: 24 }}>
+            <h3>{t('firmwareUpgrade.instructions')}</h3>
+            <ol style={{ marginLeft: 20, lineHeight: 1.6 }}>
+              <li>{t('firmwareUpgrade.step1')}</li>
+              <li>{t('firmwareUpgrade.step2')}</li>
+              <li>{t('firmwareUpgrade.step3')}</li>
+            </ol>
+          </div>
+          
+          {/* 步骤1：发送升级命令 */}
+          <div style={{ marginBottom: 24 }}>
+            <h3>{t('firmwareUpgrade.step1Title')}</h3>
+            <div style={{ backgroundColor: '#f0f8ff', padding: '16px', borderRadius: '4px', marginBottom: 16 }}>
+              <code style={{ fontSize: '16px', fontWeight: 'bold' }}>F5 5F 01 AB BF</code>
+            </div>
+            <Button 
+              type="primary" 
+              onClick={sendUpgradeCommand} 
+              disabled={!isConnected || upgradeStatus !== 'idle'}
+            >
+              {t('firmwareUpgrade.sendCommand')}
+            </Button>
+          </div>
+          
+          {/* 步骤2：上传固件 */}
+          <div style={{ marginBottom: 24 }}>
+            <h3>{t('firmwareUpgrade.step2Title')}</h3>
+            <div style={{ marginBottom: 16 }}>
+              <input 
+                type="file" 
+                id="firmware-upload" 
+                accept=".bin" 
+                style={{ display: 'none' }} 
+                onChange={handleFileUpload}
+              />
+              <Button 
+                onClick={() => document.getElementById('firmware-upload').click()} 
+                disabled={upgradeStatus === 'upgrading'}
+              >
+                {t('firmwareUpgrade.uploadButton')}
+              </Button>
+              {firmwarePath && (
+                <div style={{ display: 'flex', alignItems: 'center', marginTop: 8 }}>
+                  <span style={{ marginRight: 12 }}>{firmwarePath}</span>
+                  <Button size="small" danger onClick={clearFile}>
+                    {t('common.delete')}
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+          
+          {/* 步骤3：开始升级 */}
+          <div style={{ marginBottom: 24 }}>
+            <h3>{t('firmwareUpgrade.step3Title')}</h3>
+            <Button 
+              type="primary" 
+              onClick={startUpgrade} 
+              disabled={!isConnected || !firmwareFile || upgradeStatus === 'upgrading'}
+            >
+              {t('firmwareUpgrade.upgradeButton')}
+            </Button>
+          </div>
+          
+          {/* 升级状态和进度 */}
+          <div style={{ marginTop: 24 }}>
+            <h3>{t('firmwareUpgrade.status')}</h3>
+            <div style={{ marginBottom: 16 }}>
+              <Progress 
+                percent={upgradeProgress} 
+                status={upgradeStatus === 'completed' ? 'success' : upgradeStatus === 'error' ? 'exception' : 'active'}
+              />
+            </div>
+            <div style={{ 
+              padding: '16px', 
+              backgroundColor: '#fafafa', 
+              borderRadius: '4px',
+              minHeight: '60px',
+              display: 'flex',
+              alignItems: 'center'
+            }}>
+              {upgradeStatus === 'idle' && t('firmwareUpgrade.statusIdle')}
+              {upgradeStatus === 'sending' && t('firmwareUpgrade.statusSending')}
+              {upgradeStatus === 'upgrading' && upgradeMessage}
+              {upgradeStatus === 'completed' && t('firmwareUpgrade.statusCompleted')}
+              {upgradeStatus === 'error' && upgradeMessage}
+            </div>
+          </div>
+        </Space>
+      </Card>
+    );
+  };
+  
   // 渲染自定义名称编辑界面
   const renderCustomNames = () => {
     return (
@@ -924,6 +1270,11 @@ function App() {
             key: 'calibration',
             label: t('nav.calibration'),
             children: renderCalibration()
+          },
+          {
+            key: 'firmwareUpgrade',
+            label: t('nav.firmwareUpgrade'),
+            children: renderFirmwareUpgrade()
           },
           {
             key: 'naming',

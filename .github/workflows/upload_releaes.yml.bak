@@ -1,4 +1,4 @@
-name: Release_update
+name: Release_uploade
 on:
   push:
     tags:

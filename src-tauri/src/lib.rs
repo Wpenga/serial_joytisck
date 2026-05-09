@@ -105,6 +105,23 @@ async fn send_calibration_command(
     Ok(())
 }
 
+#[tauri::command]
+async fn set_protocol_version(
+    state: tauri::State<'_, AppState>,
+    version: String,
+) -> Result<(), String> {
+    if version != "1.0" && version != "2.0" {
+        return Err("Invalid protocol version. Must be '1.0' or '2.0'".to_string());
+    }
+    let parser = state.parser.lock().await;
+    parser.set_protocol_version(version.clone()).await;
+    
+    let mut config = state.config.lock().await;
+    config.protocol_version = version;
+    config.save();
+    Ok(())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -117,7 +134,7 @@ pub fn run() {
             }
         }))
         .manage(AppState {
-            parser: Mutex::new(DataParser::new(MatrixConfig::load())),
+            parser: Mutex::new(DataParser::new(MatrixConfig::load().protocol_version)),
             config: Mutex::new(MatrixConfig::load()),
         })
         .invoke_handler(tauri::generate_handler![
@@ -129,6 +146,7 @@ pub fn run() {
             get_config,
             save_config,
             send_calibration_command,
+            set_protocol_version,
         ])
         .setup(|app| {
             // 创建系统托盘

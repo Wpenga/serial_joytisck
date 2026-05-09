@@ -1,0 +1,96 @@
+<mxGraphModel>
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="2" value="LED灯测试页面" style="rounded=1;fillColor=#f9f9f9;strokeColor=#333333;fontSize=16;fontStyle=1;align=center;verticalAlign=middle;width=800;height=50" vertex="1" parent="1">
+      <mxGeometry x="40" y="40" width="800" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="3" value="LED控制" style="rounded=1;fillColor=#e6f3ff;strokeColor=#1a73e8;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;width=780;height=40" vertex="1" parent="1">
+      <mxGeometry x="50" y="110" width="780" height="40" as="geometry"/>
+    </mxCell>
+    <!-- LED控制网格 4行5列 -->
+    <mxCell id="4" value="LED1: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="60" y="160" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="5" value="LED2: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="220" y="160" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="6" value="LED3: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="380" y="160" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="7" value="LED4: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="540" y="160" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="8" value="LED5: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="700" y="160" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <!-- 第二行LED -->
+    <mxCell id="9" value="LED6: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="60" y="220" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="10" value="LED7: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="220" y="220" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="11" value="LED8: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="380" y="220" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="12" value="LED9: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="540" y="220" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="13" value="LED10: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="700" y="220" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <!-- 第三行LED -->
+    <mxCell id="14" value="LED11: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="60" y="280" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="15" value="LED12: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="220" y="280" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="16" value="LED13: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="380" y="280" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="17" value="LED14: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="540" y="280" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="18" value="LED15: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="700" y="280" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <!-- 第四行LED -->
+    <mxCell id="19" value="LED16: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="60" y="340" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="20" value="LED17: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="220" y="340" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="21" value="LED18: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="380" y="340" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="22" value="LED19: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="540" y="340" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="23" value="LED20: [开关]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=50" vertex="1" parent="1">
+      <mxGeometry x="700" y="340" width="150" height="50" as="geometry"/>
+    </mxCell>
+    <!-- 批量控制 -->
+    <mxCell id="24" value="批量控制" style="rounded=1;fillColor=#e6f3ff;strokeColor=#1a73e8;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;width=780;height=40" vertex="1" parent="1">
+      <mxGeometry x="50" y="420" width="780" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="25" value="[全亮按钮]" style="rounded=1;fillColor=#34a853;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=40" vertex="1" parent="1">
+      <mxGeometry x="60" y="470" width="120" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="26" value="[全灭按钮]" style="rounded=1;fillColor=#ea4335;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=40" vertex="1" parent="1">
+      <mxGeometry x="190" y="470" width="120" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="27" value="[刷新状态按钮]" style="rounded=1;fillColor=#fbbc05;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=40" vertex="1" parent="1">
+      <mxGeometry x="320" y="470" width="120" height="40" as="geometry"/>
+    </mxCell>
+    <!-- 发送指令显示 -->
+    <mxCell id="28" value="发送指令" style="rounded=1;fillColor=#e6f3ff;strokeColor=#1a73e8;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;width=780;height=40" vertex="1" parent="1">
+      <mxGeometry x="50" y="540" width="780" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="29" value="[文本框显示发送的指令]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=top;width=760;height=100" vertex="1" parent="1">
+      <mxGeometry x="60" y="590" width="760" height="100" as="geometry"/>
+    </mxCell>
+  </root>
+</mxGraphModel>

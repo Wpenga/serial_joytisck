@@ -1,0 +1,73 @@
+<mxGraphModel>
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="2" value="自定义名称页面" style="rounded=1;fillColor=#f9f9f9;strokeColor=#333333;fontSize=16;fontStyle=1;align=center;verticalAlign=middle;width=800;height=50" vertex="1" parent="1">
+      <mxGeometry x="40" y="40" width="800" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="3" value="按键名称" style="rounded=1;fillColor=#e6f3ff;strokeColor=#1a73e8;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;width=780;height=40" vertex="1" parent="1">
+      <mxGeometry x="50" y="110" width="780" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="4" value="按键1: [输入框]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=middle;width=300;height=30" vertex="1" parent="1">
+      <mxGeometry x="60" y="160" width="300" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="5" value="按键2: [输入框]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=middle;width=300;height=30" vertex="1" parent="1">
+      <mxGeometry x="380" y="160" width="300" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="6" value="按键3: [输入框]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=middle;width=300;height=30" vertex="1" parent="1">
+      <mxGeometry x="60" y="200" width="300" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="7" value="按键4: [输入框]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=middle;width=300;height=30" vertex="1" parent="1">
+      <mxGeometry x="380" y="200" width="300" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="8" value="..." style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=760;height=30" vertex="1" parent="1">
+      <mxGeometry x="60" y="240" width="760" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="9" value="ADC通道名称" style="rounded=1;fillColor=#e6f3ff;strokeColor=#1a73e8;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;width=780;height=40" vertex="1" parent="1">
+      <mxGeometry x="50" y="300" width="780" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="10" value="ADC1: [输入框]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=middle;width=300;height=30" vertex="1" parent="1">
+      <mxGeometry x="60" y="350" width="300" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="11" value="ADC2: [输入框]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=middle;width=300;height=30" vertex="1" parent="1">
+      <mxGeometry x="380" y="350" width="300" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="12" value="ADC3: [输入框]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=middle;width=300;height=30" vertex="1" parent="1">
+      <mxGeometry x="60" y="390" width="300" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="13" value="ADC4: [输入框]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=middle;width=300;height=30" vertex="1" parent="1">
+      <mxGeometry x="380" y="390" width="300" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="14" value="..." style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=760;height=30" vertex="1" parent="1">
+      <mxGeometry x="60" y="430" width="760" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="15" value="LED名称" style="rounded=1;fillColor=#e6f3ff;strokeColor=#1a73e8;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;width=780;height=40" vertex="1" parent="1">
+      <mxGeometry x="50" y="490" width="780" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="16" value="LED1: [输入框]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=middle;width=300;height=30" vertex="1" parent="1">
+      <mxGeometry x="60" y="540" width="300" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="17" value="LED2: [输入框]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=middle;width=300;height=30" vertex="1" parent="1">
+      <mxGeometry x="380" y="540" width="300" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="18" value="LED3: [输入框]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=middle;width=300;height=30" vertex="1" parent="1">
+      <mxGeometry x="60" y="580" width="300" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="19" value="LED4: [输入框]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=middle;width=300;height=30" vertex="1" parent="1">
+      <mxGeometry x="380" y="580" width="300" height="30" as="geometry"/>
+    </mxCell>
+    <mxCell id="20" value="..." style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=760;height=30" vertex="1" parent="1">
+      <mxGeometry x="60" y="620" width="760" height="30" as="geometry"/>
+    </mxCell>
+    <!-- 配置按钮 -->
+    <mxCell id="21" value="[保存配置按钮]" style="rounded=1;fillColor=#4285f4;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=40" vertex="1" parent="1">
+      <mxGeometry x="60" y="680" width="150" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="22" value="[加载默认配置按钮]" style="rounded=1;fillColor=#fbbc05;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=180;height=40" vertex="1" parent="1">
+      <mxGeometry x="230" y="680" width="180" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="23" value="[取消按钮]" style="rounded=1;fillColor=#ea4335;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=150;height=40" vertex="1" parent="1">
+      <mxGeometry x="430" y="680" width="150" height="40" as="geometry"/>
+    </mxCell>
+  </root>
+</mxGraphModel>

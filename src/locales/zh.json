@@ -39,6 +39,9 @@
   },
   "data": {
     "title": "数据解析",
+    "protocolVersion": "协议版本",
+    "versionV1": "v1.0（24按键）",
+    "versionV2": "v2.0（26按键）",
     "refreshError": "刷新数据失败: {{error}}",
     "connectionStatus": "连接状态",
     "connectFirst": "请先连接串口",

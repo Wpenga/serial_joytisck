@@ -21,10 +21,11 @@ function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   
   // 自定义名称状态
-  const [keyNames, setKeyNames] = useState(Array(24).fill(''));
+  const [keyNames, setKeyNames] = useState(Array(26).fill(''));
   const [adcNames, setAdcNames] = useState(Array(14).fill(''));
   const [ledNames, setLedNames] = useState(Array(20).fill(''));
   const [isEditingNames, setIsEditingNames] = useState(false);
+  const [protocolVersion, setProtocolVersion] = useState('2.0');
   
   // 设备校准状态
   const [calibrationConfig, setCalibrationConfig] = useState({
@@ -50,7 +51,7 @@ function App() {
   // 数据解析状态
   const [parsedData, setParsedData] = useState({
     index: 0,
-    keys: Array(24).fill(false),
+    keys: Array(26).fill(false),
     adc: Array(14).fill(0),
     leds: Array(20).fill(false),
     raw_data: [],
@@ -97,9 +98,14 @@ function App() {
       setSelectedPort(config.serial_matrix.port);
       setBaudRate(config.serial_matrix.baud_rate);
       
-      // 加载自定义名称
-      if (config.key_names && config.key_names.length === 24) {
-        setKeyNames(config.key_names);
+      if (config.protocol_version) {
+        setProtocolVersion(config.protocol_version);
+      }
+      
+      if (config.key_names && config.key_names.length >= 24) {
+        setKeyNames(config.key_names.length >= 26 
+          ? config.key_names 
+          : [...config.key_names, '按键 25', '按键 26']);
       }
       if (config.adc_names && config.adc_names.length === 14) {
         setAdcNames(config.adc_names);
@@ -109,6 +115,15 @@ function App() {
       }
     } catch (err) {
       message.error(t('serial.loadConfigError'));
+    }
+  };
+  
+  const handleVersionChange = async (version) => {
+    setProtocolVersion(version);
+    try {
+      await invoke('set_protocol_version', { version });
+    } catch (err) {
+      message.error(`版本切换失败: ${err}`);
     }
   };
   
@@ -547,10 +562,11 @@ function App() {
 
   // 渲染按键状态
   const renderKeys = () => {
+    const keyCount = protocolVersion === '2.0' ? 26 : 24;
     return (
       <Card title={t('data.keysTitle')} style={{ marginBottom: 16 }}>
         <Row gutter={[16, 16]}>
-          {parsedData.keys.map((key, index) => (
+          {parsedData.keys.slice(0, keyCount).map((key, index) => (
             <Col key={index} xs={12} sm={8} md={6} lg={4} xl={3}>
               <div 
                 className={`key-indicator ${key ? 'active' : ''}`}
@@ -649,14 +665,13 @@ function App() {
 
   // 渲染原始数据
   const renderRawData = () => {
-    // 将原始数据按24字节分组，每组之间换行
+    const frameLen = protocolVersion === '2.0' ? 25 : 24;
     const bytes = parsedData.raw_data.map(byte => byte.toString(16).padStart(2, '0').toUpperCase());
     let allGroups = [];
     
-    // 每24字节为一组，只保留AA开头的有效帧
-    for (let i = 0; i < bytes.length - 23; i += 24) {
+    for (let i = 0; i < bytes.length - (frameLen - 1); i += frameLen) {
       if (bytes[i] === 'AA') {
-        const group = bytes.slice(i, i + 24).join(' ');
+        const group = bytes.slice(i, i + frameLen).join(' ');
         allGroups.push(group);
       }
     }
@@ -1049,7 +1064,7 @@ function App() {
           <div>
             <h3 style={{ marginBottom: 16 }}>{t('naming.keyTitle')}</h3>
             <Row gutter={[16, 16]}>
-              {Array.from({ length: 24 }).map((_, index) => (
+              {Array.from({ length: protocolVersion === '2.0' ? 26 : 24 }).map((_, index) => (
                 <Col key={index} xs={24} sm={12} md={8} lg={6} xl={4}>
                   <input
                     type="text"
@@ -1229,7 +1244,22 @@ function App() {
             label: t('nav.dataParsing'),
             children: (
               <div>
-                <Card title={t('data.title')} style={{ marginBottom: 16 }}>
+                <Card title={t('data.title')} style={{ marginBottom: 16 }}
+                  extra={
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ fontSize: '14px', color: '#666' }}>{t('data.protocolVersion')}:</span>
+                      <Select
+                        value={protocolVersion}
+                        onChange={handleVersionChange}
+                        style={{ width: 180 }}
+                        options={[
+                          { value: '1.0', label: t('data.versionV1') },
+                          { value: '2.0', label: t('data.versionV2') },
+                        ]}
+                      />
+                    </div>
+                  }
+                >
                   <Space direction="vertical" style={{ width: '100%' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <Title level={4}>{t('data.connectionStatus')}</Title>

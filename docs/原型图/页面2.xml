@@ -1,0 +1,214 @@
+<mxGraphModel>
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="2" value="数据解析页面" style="rounded=1;fillColor=#f9f9f9;strokeColor=#333333;fontSize=16;fontStyle=1;align=center;verticalAlign=middle;width=800;height=50" vertex="1" parent="1">
+      <mxGeometry x="40" y="40" width="800" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="3" value="按键状态" style="rounded=1;fillColor=#e6f3ff;strokeColor=#1a73e8;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;width=780;height=40" vertex="1" parent="1">
+      <mxGeometry x="50" y="110" width="780" height="40" as="geometry"/>
+    </mxCell>
+    <!-- 按键网格 4行6列 -->
+    <mxCell id="4" value="按键1" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="60" y="160" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="5" value="按键2" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="190" y="160" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="6" value="按键3" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="320" y="160" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="7" value="按键4" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="450" y="160" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="8" value="按键5" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="580" y="160" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="9" value="按键6" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="710" y="160" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <!-- 第二行按键 -->
+    <mxCell id="10" value="按键7" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="60" y="220" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="11" value="按键8" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="190" y="220" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="12" value="按键9" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="320" y="220" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="13" value="按键10" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="450" y="220" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="14" value="按键11" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="580" y="220" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="15" value="按键12" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="710" y="220" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <!-- 第三行按键 -->
+    <mxCell id="16" value="按键13" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="60" y="280" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="17" value="按键14" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="190" y="280" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="18" value="按键15" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="320" y="280" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="19" value="按键16" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="450" y="280" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="20" value="按键17" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="580" y="280" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="21" value="按键18" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="710" y="280" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <!-- 第四行按键 -->
+    <mxCell id="22" value="按键19" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="60" y="340" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="23" value="按键20" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="190" y="340" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="24" value="按键21" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="320" y="340" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="25" value="按键22" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="450" y="340" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="26" value="按键23" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="580" y="340" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <mxCell id="27" value="按键24" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=120;height=50" vertex="1" parent="1">
+      <mxGeometry x="710" y="340" width="120" height="50" as="geometry"/>
+    </mxCell>
+    <!-- ADC数据 -->
+    <mxCell id="28" value="ADC数据" style="rounded=1;fillColor=#e6f3ff;strokeColor=#1a73e8;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;width=780;height=40" vertex="1" parent="1">
+      <mxGeometry x="50" y="410" width="780" height="40" as="geometry"/>
+    </mxCell>
+    <!-- ADC网格 2行7列 -->
+    <mxCell id="29" value="ADC1: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="60" y="460" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <mxCell id="30" value="ADC2: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="170" y="460" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <mxCell id="31" value="ADC3: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="280" y="460" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <mxCell id="32" value="ADC4: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="390" y="460" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <mxCell id="33" value="ADC5: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="500" y="460" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <mxCell id="34" value="ADC6: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="610" y="460" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <mxCell id="35" value="ADC7: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="720" y="460" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <!-- 第二行ADC -->
+    <mxCell id="36" value="ADC8: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="60" y="530" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <mxCell id="37" value="ADC9: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="170" y="530" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <mxCell id="38" value="ADC10: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="280" y="530" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <mxCell id="39" value="ADC11: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="390" y="530" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <mxCell id="40" value="ADC12: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="500" y="530" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <mxCell id="41" value="ADC13: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="610" y="530" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <mxCell id="42" value="ADC14: [进度条]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=100;height=60" vertex="1" parent="1">
+      <mxGeometry x="720" y="530" width="100" height="60" as="geometry"/>
+    </mxCell>
+    <!-- LED状态 -->
+    <mxCell id="43" value="LED状态" style="rounded=1;fillColor=#e6f3ff;strokeColor=#1a73e8;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;width=380;height=40" vertex="1" parent="1">
+      <mxGeometry x="50" y="610" width="380" height="40" as="geometry"/>
+    </mxCell>
+    <!-- LED网格 4行5列 -->
+    <mxCell id="44" value="LED1" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="60" y="660" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="45" value="LED2" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="140" y="660" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="46" value="LED3" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="220" y="660" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="47" value="LED4" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="300" y="660" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="48" value="LED5" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="380" y="660" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <!-- 第二行LED -->
+    <mxCell id="49" value="LED6" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="60" y="710" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="50" value="LED7" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="140" y="710" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="51" value="LED8" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="220" y="710" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="52" value="LED9" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="300" y="710" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="53" value="LED10" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="380" y="710" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <!-- 第三行LED -->
+    <mxCell id="54" value="LED11" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="60" y="760" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="55" value="LED12" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="140" y="760" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="56" value="LED13" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="220" y="760" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="57" value="LED14" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="300" y="760" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="58" value="LED15" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="380" y="760" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <!-- 第四行LED -->
+    <mxCell id="59" value="LED16" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="60" y="810" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="60" value="LED17" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="140" y="810" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="61" value="LED18" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="220" y="810" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="62" value="LED19" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="300" y="810" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="63" value="LED20" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=center;verticalAlign=middle;width=70;height=40" vertex="1" parent="1">
+      <mxGeometry x="380" y="810" width="70" height="40" as="geometry"/>
+    </mxCell>
+    <!-- 原始数据 -->
+    <mxCell id="64" value="原始数据" style="rounded=1;fillColor=#e6f3ff;strokeColor=#1a73e8;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;width=380;height=40" vertex="1" parent="1">
+      <mxGeometry x="460" y="610" width="380" height="40" as="geometry"/>
+    </mxCell>
+    <mxCell id="65" value="[文本框显示原始数据]" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=top;width=360;height=200" vertex="1" parent="1">
+      <mxGeometry x="470" y="660" width="360" height="200" as="geometry"/>
+    </mxCell>
+    <mxCell id="66" value="数据有效性: 有效" style="rounded=1;fillColor=#ffffff;strokeColor=#333333;fontSize=12;align=left;verticalAlign=middle;width=360;height=30" vertex="1" parent="1">
+      <mxGeometry x="470" y="870" width="360" height="30" as="geometry"/>
+    </mxCell>
+  </root>
+</mxGraphModel>

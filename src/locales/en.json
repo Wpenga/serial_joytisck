@@ -39,6 +39,9 @@
   },
   "data": {
     "title": "Data Parsing",
+    "protocolVersion": "Protocol Version",
+    "versionV1": "v1.0 (24 Keys)",
+    "versionV2": "v2.0 (26 Keys)",
     "refreshError": "Failed to refresh data: {{error}}",
     "connectionStatus": "Connection Status",
     "connectFirst": "Please connect first",

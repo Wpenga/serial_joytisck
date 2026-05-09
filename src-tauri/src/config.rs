@@ -20,19 +20,16 @@ pub struct SerialScreenConfig {
     pub parity: String,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct MatrixMapping {
-    pub last_received: String,
-    pub mute_status: bool,
-}
+
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MatrixConfig {
     pub serial_matrix: SerialConfig,
-    pub serial_screen: SerialScreenConfig,  // 屏幕串口配置
-    pub key_names: Vec<String>,  // 按键名称
-    pub adc_names: Vec<String>,  // ADC名称
-    pub led_names: Vec<String>,  // LED名称
+    pub serial_screen: SerialScreenConfig,
+    pub protocol_version: String,
+    pub key_names: Vec<String>,
+    pub adc_names: Vec<String>,
+    pub led_names: Vec<String>,
 }
 
 impl MatrixConfig {
@@ -102,8 +99,8 @@ impl Default for MatrixConfig {
                 stop_bits: 1,
                 parity: "None".to_string(),
             },
-            // 自定义名称配置
-            key_names: (1..=24).map(|i| format!("按键 {}", i)).collect(),
+            protocol_version: "2.0".to_string(),
+            key_names: (1..=26).map(|i| format!("按键 {}", i)).collect(),
             adc_names: (1..=14).map(|i| format!("ADC {}", i)).collect(),
             led_names: (1..=20).map(|i| format!("LED {}", i)).collect(),
         }

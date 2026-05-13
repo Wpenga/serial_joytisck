@@ -14,7 +14,7 @@
     "stop_bits": 1,
     "parity": "None"
   },
-  "protocol_version": "2.0",
+  "protocol_version": "2.1",
   "key_names": [
     "按键 1",
     "按键 2",
@@ -41,7 +41,9 @@
     "按键 23",
     "按键 24",
     "按键 25",
-    "按键 26"
+    "按键 26",
+    "按键 27",
+    "按键 28"
   ],
   "adc_names": [
     "ADC 1",

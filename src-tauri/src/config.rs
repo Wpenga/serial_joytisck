@@ -99,8 +99,8 @@ impl Default for MatrixConfig {
                 stop_bits: 1,
                 parity: "None".to_string(),
             },
-            protocol_version: "2.0".to_string(),
-            key_names: (1..=26).map(|i| format!("按键 {}", i)).collect(),
+            protocol_version: "2.1".to_string(),
+            key_names: (1..=28).map(|i| format!("按键 {}", i)).collect(),
             adc_names: (1..=14).map(|i| format!("ADC {}", i)).collect(),
             led_names: (1..=20).map(|i| format!("LED {}", i)).collect(),
         }

@@ -110,8 +110,8 @@ async fn set_protocol_version(
     state: tauri::State<'_, AppState>,
     version: String,
 ) -> Result<(), String> {
-    if version != "1.0" && version != "2.0" {
-        return Err("Invalid protocol version. Must be '1.0' or '2.0'".to_string());
+    if version != "1.0" && version != "2.0" && version != "2.1" {
+        return Err("Invalid protocol version. Must be '1.0', '2.0' or '2.1'".to_string());
     }
     let parser = state.parser.lock().await;
     parser.set_protocol_version(version.clone()).await;

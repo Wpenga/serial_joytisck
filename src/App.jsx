@@ -21,11 +21,11 @@ function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   
   // 自定义名称状态
-  const [keyNames, setKeyNames] = useState(Array(26).fill(''));
+  const [keyNames, setKeyNames] = useState(Array(28).fill(''));
   const [adcNames, setAdcNames] = useState(Array(14).fill(''));
   const [ledNames, setLedNames] = useState(Array(20).fill(''));
   const [isEditingNames, setIsEditingNames] = useState(false);
-  const [protocolVersion, setProtocolVersion] = useState('2.0');
+  const [protocolVersion, setProtocolVersion] = useState('2.1');
   
   // 设备校准状态
   const [calibrationConfig, setCalibrationConfig] = useState({
@@ -51,7 +51,7 @@ function App() {
   // 数据解析状态
   const [parsedData, setParsedData] = useState({
     index: 0,
-    keys: Array(26).fill(false),
+    keys: Array(28).fill(false),
     adc: Array(14).fill(0),
     leds: Array(20).fill(false),
     raw_data: [],
@@ -562,7 +562,7 @@ function App() {
 
   // 渲染按键状态
   const renderKeys = () => {
-    const keyCount = protocolVersion === '2.0' ? 26 : 24;
+    const keyCount = protocolVersion === '2.1' ? 28 : protocolVersion === '2.0' ? 26 : 24;
     return (
       <Card title={t('data.keysTitle')} style={{ marginBottom: 16 }}>
         <Row gutter={[16, 16]}>
@@ -665,7 +665,7 @@ function App() {
 
   // 渲染原始数据
   const renderRawData = () => {
-    const frameLen = protocolVersion === '2.0' ? 25 : 24;
+    const frameLen = protocolVersion === '1.0' ? 24 : 25;
     const bytes = parsedData.raw_data.map(byte => byte.toString(16).padStart(2, '0').toUpperCase());
     let allGroups = [];
     
@@ -1064,7 +1064,7 @@ function App() {
           <div>
             <h3 style={{ marginBottom: 16 }}>{t('naming.keyTitle')}</h3>
             <Row gutter={[16, 16]}>
-              {Array.from({ length: protocolVersion === '2.0' ? 26 : 24 }).map((_, index) => (
+              {Array.from({ length: protocolVersion === '2.1' ? 28 : protocolVersion === '2.0' ? 26 : 24 }).map((_, index) => (
                 <Col key={index} xs={24} sm={12} md={8} lg={6} xl={4}>
                   <input
                     type="text"
@@ -1255,6 +1255,7 @@ function App() {
                         options={[
                           { value: '1.0', label: t('data.versionV1') },
                           { value: '2.0', label: t('data.versionV2') },
+                          { value: '2.1', label: t('data.versionV21') },
                         ]}
                       />
                     </div>

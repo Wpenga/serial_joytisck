@@ -5,7 +5,7 @@ use std::sync::Arc;
 #[derive(Clone, serde::Serialize)]
 pub struct ParsedData {
     pub index: u8,
-    pub keys: [bool; 26],
+    pub keys: [bool; 28],
     pub adc: [u8; 14],
     pub leds: [bool; 20],
     pub raw_data: Vec<u8>,
@@ -16,7 +16,7 @@ impl Default for ParsedData {
     fn default() -> Self {
         Self {
             index: 0,
-            keys: [false; 26],
+            keys: [false; 28],
             adc: [0; 14],
             leds: [false; 20],
             raw_data: Vec::new(),
@@ -117,10 +117,10 @@ impl DataParser {
         parsed.raw_data = data.to_vec();
 
         let (frame_len, key_count, _key_bytes, adc_offset, led_offset, checksum_offset) =
-            if version == "2.0" {
-                (25, 26, 4, 6, 20, 23)
-            } else {
-                (24, 24, 3, 5, 19, 22)
+            match version {
+                "2.1" => (25, 28, 4, 6, 20, 23),
+                "2.0" => (25, 26, 4, 6, 20, 23),
+                _ => (24, 24, 3, 5, 19, 22),
             };
 
         let tail_offset = frame_len - 1;

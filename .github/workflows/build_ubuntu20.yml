@@ -1,7 +1,9 @@
-name: new_tarui2_build_ubuntu20.04
+name: 28input_tarui2_build_ubuntu20.04
 on:
   push:
-    branches: ["28input"]
+    branches:
+      - 'main'
+      - '28input'
     tags:
       - 'v*'
   workflow_dispatch:
@@ -32,6 +34,11 @@ jobs:
                 libjavascriptcoregtk-4.0-dev \
                 libssl-dev \
                 libudev-dev \
+                libglib2.0-dev \
+                libgdk-pixbuf2.0-dev \
+                libpango1.0-dev \
+                libcairo2-dev \
+                libatk1.0-dev \
               && curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
               && export PATH="/root/.cargo/bin:$PATH" \
               && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \

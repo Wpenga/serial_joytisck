@@ -1,4 +1,4 @@
-name: 28input_tarui2_build_ubuntu20.04
+name: main_tarui2_build_ubuntu20.04
 on:
   push:
     branches:
@@ -24,7 +24,7 @@ jobs:
             bash -c '
               export DEBIAN_FRONTEND=noninteractive
               apt-get update && apt-get install -y \
-                build-essential curl wget file \
+                build-essential curl wget file pkg-config \
                 libwebkit2gtk-4.0-dev \
                 libgtk-3-dev \
                 libappindicator3-dev \
@@ -39,6 +39,7 @@ jobs:
                 libpango1.0-dev \
                 libcairo2-dev \
                 libatk1.0-dev \
+              && export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/share/pkgconfig \
               && curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
               && export PATH="/root/.cargo/bin:$PATH" \
               && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \

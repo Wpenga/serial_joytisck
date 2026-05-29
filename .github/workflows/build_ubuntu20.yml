@@ -1,4 +1,4 @@
-name: main_tarui2_build_ubuntu20.04
+name: main_build_ubuntu22.04
 on:
   push:
     branches:
@@ -15,12 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build inside Ubuntu 20.04 container
+      - name: Build inside Ubuntu 22.04 container
         run: |
           docker run --rm \
             -v ${{ github.workspace }}:/app \
             -w /app \
-            ubuntu:20.04 \
+            ubuntu:22.04 \
             bash -c '
               export DEBIAN_FRONTEND=noninteractive
               apt-get update && apt-get install -y \
@@ -66,8 +66,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: ubuntu20-build-${{ github.run_id }}
-          releaseName: 'Ubuntu 20.04 Build ${{ github.run_id }}'
+          tagName: ubuntu22-build-${{ github.run_id }}
+          releaseName: 'Ubuntu 22.04 Build ${{ github.run_id }}'
           releaseBody: ${{ steps.read-notes.outputs.notes }}
           releaseDraft: true
           prerelease: false
@@ -75,5 +75,5 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: linux-bundle-ubuntu20
+          name: linux-bundle-ubuntu22
           path: src-tauri/target/release/bundle/*

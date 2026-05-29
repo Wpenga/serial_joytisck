@@ -1,8 +1,9 @@
-name: Build tauri2_ubuntu20.04
-
+name: tarui2_build_ubuntu20.04
 on:
+  push:
+    tags:
+      - 'v*'
   workflow_dispatch:
-
 jobs:
   build-linux:
     runs-on: ubuntu-22.04

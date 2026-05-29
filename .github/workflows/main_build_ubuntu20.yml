@@ -38,7 +38,8 @@ jobs:
               && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
               && apt-get install -y nodejs \
               && npm install \
-              && cargo tauri build
+              && npm install -D @tauri-apps/cli@latest \
+              && npx tauri build
             '
 
       - name: Read release notes

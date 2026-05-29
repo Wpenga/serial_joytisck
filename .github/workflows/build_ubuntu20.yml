@@ -1,0 +1,68 @@
+name: Build tauri2_ubuntu20.04
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build inside Ubuntu 20.04 container
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/app \
+            -w /app \
+            ubuntu:20.04 \
+            bash -c '
+              export DEBIAN_FRONTEND=noninteractive
+              apt-get update && apt-get install -y \
+                build-essential curl wget file \
+                libwebkit2gtk-4.0-dev \
+                libgtk-3-dev \
+                libappindicator3-dev \
+                librsvg2-dev \
+                patchelf \
+                libsoup2.4-dev \
+                libjavascriptcoregtk-4.0-dev \
+                libssl-dev \
+                libudev-dev \
+              && curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
+              && export PATH="/root/.cargo/bin:$PATH" \
+              && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+              && apt-get install -y nodejs \
+              && npm install \
+              && cargo tauri build
+            '
+
+      - name: Read release notes
+        id: read-notes
+        shell: bash
+        run: |
+          DATE=$(date +'%Y年%m月%d日')
+          NOTES=$(cat .github/workflows/markdown/release.md)
+          NOTES=${NOTES//__DATE__/$DATE}
+          NOTES=${NOTES//%/%25}
+          echo "notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$NOTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Upload to GitHub Release
+        uses: tauri-apps/tauri-action@v0.5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ubuntu20-build-${{ github.run_id }}
+          releaseName: 'Ubuntu 20.04 Build ${{ github.run_id }}'
+          releaseBody: ${{ steps.read-notes.outputs.notes }}
+          releaseDraft: true
+          prerelease: false
+          args: ''
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-bundle-ubuntu20
+          path: src-tauri/target/release/bundle/*

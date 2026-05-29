@@ -30,7 +30,7 @@ jobs:
                 libappindicator3-dev \
                 librsvg2-dev \
                 patchelf \
-                libsoup2.4-dev \
+                libsoup3-dev \
                 libjavascriptcoregtk-4.0-dev \
                 libssl-dev \
                 libudev-dev \

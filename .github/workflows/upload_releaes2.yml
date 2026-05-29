@@ -19,8 +19,8 @@ jobs:
             args: '--target universal-apple-darwin'
           - platform: 'ubuntu-22.04'
             args: ''
-          - platform: 'ubuntu-20.04'
-            args: ''
+          # - platform: 'ubuntu-20.04'
+          #   args: ''
           - platform: 'windows-latest'
             args: ''
 

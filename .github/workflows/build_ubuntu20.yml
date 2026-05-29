@@ -1,6 +1,7 @@
 name: tarui2_build_ubuntu20.04
 on:
   push:
+    branches: ["28input"]
     tags:
       - 'v*'
   workflow_dispatch:
